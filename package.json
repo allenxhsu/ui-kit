@@ -1,8 +1,8 @@
 {
   "name": "ui-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Shared sci-fi HUD UI kit for the toolkit apps: Heptabase, IDEF0, Pyramid and Metropolis.",
+  "description": "Shared sci-fi HUD UI kit for the toolkit apps: Heptabase, IDEF0, SysML, Project, Pyramid, Profiler, Hypermail, Metropolis, Habit and BOM.",
   "type": "module",
   "exports": {
     "./css/*": "./css/*",
@@ -12,12 +12,37 @@
       "types": "./js/theme.d.ts",
       "default": "./js/theme.js"
     },
-    "./theme-picker": "./js/theme-picker.js",
+    "./theme-picker": {
+      "types": "./js/theme-picker.d.ts",
+      "default": "./js/theme-picker.js"
+    },
+    "./sync-status": {
+      "types": "./js/sync-status.d.ts",
+      "default": "./js/sync-status.js"
+    },
+    "./toast": {
+      "types": "./js/toast.d.ts",
+      "default": "./js/toast.js"
+    },
+    "./dialog": {
+      "types": "./js/dialog.d.ts",
+      "default": "./js/dialog.js"
+    },
+    "./command-palette": {
+      "types": "./js/command-palette.d.ts",
+      "default": "./js/command-palette.js"
+    },
+    "./portal-bar": {
+      "types": "./js/portal-bar.d.ts",
+      "default": "./js/portal-bar.js"
+    },
     "./tokens.json": "./tokens/tokens.json"
   },
   "files": ["css", "adapters", "fonts", "js", "tokens", "swift"],
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
-    "serve": "python3 -m http.server 8130 --directory .."
+    "copy-into": "node scripts/copy-into.mjs",
+    "check-copies": "node scripts/copy-into.mjs --check ../IDEF0/ui-kit ../SysML/ui-kit ../Project/ui-kit",
+    "serve": "python3 -m http.server 8130"
   }
 }

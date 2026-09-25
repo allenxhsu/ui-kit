@@ -3,12 +3,15 @@
   Toolkit app template.
 
   Copy this folder into a new app (e.g. ClaudWorkSpace/Pyramid/ui) and then:
-    1. Point the two kit paths below at ../ui-kit/… from the new location.
-    2. Set data-app on <html> to the app's id: heptabase | idef0 | pyramid | metropolis.
+    1. Point the kit paths below at the app's copy of the kit (ui-kit/…), or,
+       from a Vite app, at the "ui-kit" package. See ../README.md.
+    2. Set data-app on <html> to the app's id: one of APPS in ../js/theme.js.
     3. Replace the brand block, nav items and views in app.js.
 
   The shell markup — titlebar, brand, nav, sections, footer, header, content —
   is the contract every app shares. Keep the class names; change the content.
+  The Components view is the gallery: every class and every web component.
+  portal-me.json stands in for the Portal's /auth/me so the bar has a roster.
 -->
 <html lang="en" data-app="pyramid">
   <head>
@@ -23,8 +26,15 @@
       initTheme({ app: document.documentElement.dataset.app, macInset: detectMacDesktop() });
     </script>
     <script type="module" src="../js/theme-picker.js"></script>
+    <script type="module" src="../js/sync-status.js"></script>
+    <script type="module" src="../js/toast.js"></script>
+    <script type="module" src="../js/dialog.js"></script>
+    <script type="module" src="../js/command-palette.js"></script>
+    <script type="module" src="../js/portal-bar.js"></script>
   </head>
   <body>
+    <!-- Inside the Portal: the bar sits above the shell and the shell gives up its height (css). -->
+    <sc-portal-bar app="pyramid" src="./portal-me.json"></sc-portal-bar>
     <div class="sc-shell" id="shell">
       <aside class="sc-sidebar">
         <div class="sc-titlebar">
@@ -51,8 +61,8 @@
 
         <footer class="sc-sidebar-foot">
           <button class="sc-button sc-button--ghost sc-button--icon sc-button--sm" title="Settings" data-view="settings">⚙</button>
-          <span class="sc-spacer"></span>
-          <span class="sc-badge" title="Sync status">SYNCED</span>
+          <!-- Driven by sync-kit's window events; see ../js/sync-status.js. -->
+          <sc-sync-status style="flex: 1"></sc-sync-status>
         </footer>
       </aside>
 
@@ -63,11 +73,19 @@
           <span class="sc-spacer"></span>
           <span class="sc-resource"><span class="sc-resource-icon"></span><span id="res-a">1,284</span></span>
           <span class="sc-resource sc-resource--alt"><span class="sc-resource-icon"></span><span>312</span></span>
+          <button class="sc-button sc-button--ghost sc-button--sm" data-action="palette" title="Commands (⌘K)">⌘K</button>
           <button class="sc-button sc-button--primary" data-action="dialog">+ New</button>
         </header>
         <div class="sc-content sc-hexgrid" id="view"></div>
       </main>
     </div>
+
+    <!-- Web components that live outside the shell. -->
+    <sc-command-palette hotkey="k" placeholder="Search commands…"></sc-command-palette>
+    <sc-toast></sc-toast>
+    <sc-dialog id="new-dialog" heading="New pyramid" buttons="cancel:Cancel:ghost,create:Create:primary">
+      <label class="sc-field"><span>Title</span><input class="sc-input" id="new-title" autofocus placeholder="Untitled" /></label>
+    </sc-dialog>
 
     <script type="module" src="./app.js"></script>
   </body>

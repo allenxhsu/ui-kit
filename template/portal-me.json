@@ -1,0 +1,16 @@
+{
+  "email": "pilot@example.com",
+  "workspaces": [{ "id": "personal", "name": "Personal" }],
+  "apps": [
+    { "id": "heptabase", "name": "Heptabase", "mark": "HB", "color": "#a48df0", "path": "/heptabase/" },
+    { "id": "idef0", "name": "IDEF0 Modeler", "mark": "A0", "color": "#6aa8e6", "path": "/idef0/" },
+    { "id": "sysml", "name": "SysML Modeler", "mark": "SY", "color": "#82cb4d", "path": "/sysml/" },
+    { "id": "project", "name": "Project Planner", "mark": "PP", "color": "#55c364", "path": "/project/" },
+    { "id": "pyramid", "name": "Pyramid Principle", "mark": "PY", "color": "#e09a5a", "path": "/pyramid/" },
+    { "id": "profiler", "name": "Profiler", "mark": "PR", "color": "#c173de", "path": "/profiler/" },
+    { "id": "hypermail", "name": "Hypermail", "mark": "HM", "color": "#e873d1", "path": "/hypermail/" },
+    { "id": "metropolis", "name": "Metropolis", "mark": "MP", "color": "#3cbba7", "path": "/metropolis/" },
+    { "id": "habit", "name": "Habit", "mark": "HA", "color": "#eb7aa0", "path": "/habit/" },
+    { "id": "bom", "name": "BOM Manager", "mark": "BM", "color": "#ced24b", "path": "/bom/" }
+  ]
+}
