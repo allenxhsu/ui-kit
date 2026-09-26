@@ -46,18 +46,18 @@ gallery; Settings switches the palette.
 
 ## How it switches on
 
-Nothing on a page changes until `<html>` carries `data-sc`. `js/theme.js` manages
-four attributes, and all the CSS keys off them:
+`js/theme.js` sets `data-sc` on `<html>` before first paint, and all the CSS
+keys off it and three companions:
 
 | Attribute | Values | Effect |
 | --- | --- | --- |
-| `data-sc` | `""` / `"mac"` / absent | The HUD skin, the macOS skin, or the app's own classic styling |
+| `data-sc` | `""` / `"mac"` | The HUD skin or the macOS skin |
 | `data-race` | `steel` `crystal` `chitin` under the HUD, `light` `dark` under macOS | Palette |
 | `data-app` | `heptabase` `idef0` `sysml` `project` `pyramid` `profiler` `hypermail` `metropolis` `habit` `bom` | The app's identity colour (`--sc-app`) |
 | `data-sc-effects="off"` | | Removes the scanlines and glow overlays |
 
 Every app shows appearance preferences through the same `<sc-theme-picker>`:
-Interface (HUD, macOS, Classic), then the HUD's palette and effects or the
+Interface (HUD or macOS), then the HUD's palette and effects or the
 macOS skin's appearance (Auto, Light, Dark). They are stored under `ui-kit.*`
 in localStorage, so apps served from the same origin share one choice.
 
@@ -229,9 +229,8 @@ to change:
 
 The adapter maps the app's existing variables (`--ink`, `--panel`, `--accent`, …)
 onto kit tokens, so every existing screen restyles at once. From there, screens
-can move to `sc-*` components one at a time. Removing `data-sc` shows the
-original look again at any point. The web components load the same way, one
-`<script type="module">` each.
+can move to `sc-*` components one at a time. The web components load the same
+way, one `<script type="module">` each.
 
 Notes:
 - **IDEF0:** the adapter themes the on-screen diagram sheet dark. Before shipping,
@@ -321,7 +320,7 @@ also exported (`ScToast`, `ScDialog`, …) for the static APIs.
 
 | Element | Module | What it does |
 | --- | --- | --- |
-| `<sc-theme-picker>` | `js/theme-picker.js` | Skin, palette and effects controls. Writes through `theme.js`, stays in sync across tabs. |
+| `<sc-theme-picker>` | `js/theme-picker.js` | Interface (HUD or macOS), palette, effects and appearance controls. Writes through `theme.js`, stays in sync across tabs. |
 | `<sc-sync-status>` | `js/sync-status.js` | Sync readout: phase dot, "Synced 4 min ago · ↓3 ↑1", Sync now. Driven by `sync-kit:status` events on `window` (or `el.status = …`); its button dispatches `sync-kit:sync-now`. A `lastError` code of `unauthorized` shows a Sign in link instead of the error; offline, an error reads as Offline. Never imports sync-kit. `no-button` hides the button. |
 | `<sc-portal-bar>` | `js/portal-bar.js` | The Portal's bar above the shell: app switcher from the roster (marks in identity colours, current app lit, links to `/<id>/`), account, Sign out. `src` (default `/auth/me`), `app`. Renders from the `toolkit.session` cache first; offline or on 401 it shows Sign in and never blocks the app. |
 | `<sc-toast>` | `js/toast.js` | Toast region, bottom-right. `ScToast.show(text, { tone, action, duration })` returns `{ dismiss }`; the region is created on first use if the page has none. |

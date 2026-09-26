@@ -2,8 +2,8 @@
  * Heptabase adapter: maps Heptabase's design tokens onto the kit.
  *
  * `html[data-sc]` outranks Heptabase's `:root` and its dark-mode media query,
- * so load order doesn't matter and switching the skin off restores the classic
- * palette untouched.
+ * so load order doesn't matter and Heptabase's own values stay untouched
+ * underneath.
  */
 html[data-sc] {
   --bg: var(--sc-bg);
