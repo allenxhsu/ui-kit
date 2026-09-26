@@ -59,6 +59,10 @@ raceNames.forEach((race, i) => {
   for (const [k, v] of Object.entries(colors)) {
     css.push(`  --sc-${k}: ${v};`, `  --sc-${k}-rgb: ${rgb(v).join(' ')};`);
   }
+  // A race may bring its own status colours (the macOS appearances do).
+  for (const [k, v] of Object.entries(tokens.races[race].status || {})) {
+    css.push(`  --sc-${k}: ${v};`, `  --sc-${k}-rgb: ${rgb(v).join(' ')};`);
+  }
   css.push('}', '');
 });
 
@@ -79,7 +83,8 @@ const swiftColor = (hex) => {
 const colorKeys = Object.keys(tokens.races[raceNames[0]].colors);
 const swift = [];
 swift.push(`// ${HEADER}`, '', 'import SwiftUI', '');
-swift.push('/// Toolkit UI theme for SwiftUI apps. Mirrors css/tokens.css one-to-one.');
+swift.push('/// Toolkit UI theme for SwiftUI apps. Mirrors css/tokens.css one-to-one: the HUD palettes');
+swift.push('/// (steel, crystal, chitin) and the two macOS appearances (light, dark).');
 swift.push('public enum SCRace: String, CaseIterable, Identifiable {');
 for (const race of raceNames) swift.push(`    case ${race}`);
 swift.push('    public var id: String { rawValue }');

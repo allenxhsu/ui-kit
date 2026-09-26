@@ -6,7 +6,17 @@
  * class names inside its components; see ../README.md.
  */
 
-import { RACES, RACE_LABELS, setRace } from '../js/theme.js';
+import {
+  APPEARANCES,
+  APPEARANCE_LABELS,
+  RACES,
+  RACE_LABELS,
+  SKINS,
+  SKIN_LABELS,
+  setAppearance,
+  setRace,
+  setSkin,
+} from '../js/theme.js';
 import { ScToast } from '../js/toast.js';
 import { ScDialog } from '../js/dialog.js';
 
@@ -178,7 +188,9 @@ palette.commands = [
   { id: 'toast', label: 'Show a toast', group: 'Actions' },
   ...NAV.map((n) => ({ id: `go:${n.id}`, label: `Go to ${n.label}`, shortcut: `g ${n.label[0].toLowerCase()}`, group: 'Navigate' })),
   { id: 'collapse', label: 'Toggle sidebar', shortcut: '⌘\\', group: 'View' },
-  ...RACES.map((r) => ({ id: `race:${r}`, label: `Palette: ${RACE_LABELS[r]}`, group: 'Appearance' })),
+  ...SKINS.map((s) => ({ id: `skin:${s}`, label: `Interface: ${SKIN_LABELS[s]}`, group: 'Appearance' })),
+  ...RACES.map((r) => ({ id: `race:${r}`, label: `HUD palette: ${RACE_LABELS[r]}`, group: 'Appearance' })),
+  ...APPEARANCES.map((m) => ({ id: `appearance:${m}`, label: `macOS appearance: ${APPEARANCE_LABELS[m]}`, group: 'Appearance' })),
 ];
 palette.addEventListener('sc-command', (e) => {
   const { id } = e.detail;
@@ -190,6 +202,8 @@ palette.addEventListener('sc-command', (e) => {
   else if (id === 'collapse') $('#shell').classList.toggle('is-collapsed');
   else if (id.startsWith('go:')) go(id.slice(3));
   else if (id.startsWith('race:')) setRace(id.slice(5));
+  else if (id.startsWith('skin:')) setSkin(id.slice(5));
+  else if (id.startsWith('appearance:')) setAppearance(id.slice(11));
 });
 
 // ---------------------------------------------------------------------------

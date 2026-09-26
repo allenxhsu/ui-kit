@@ -30,3 +30,12 @@ html[data-sc] {
   --mono: var(--sc-font-mono);
   color-scheme: dark;
 }
+
+/* macOS skin: the platform's shadows and grid; --radius already follows --sc-radius. */
+html[data-sc="mac"] {
+  --shadow-sm: var(--sc-shadow-1);
+  --shadow-md: var(--sc-shadow-2);
+  --shadow-lg: var(--sc-shadow-3);
+  --grid-dot: color-mix(in srgb, var(--sc-text) 12%, transparent);
+  --accent-soft: color-mix(in srgb, var(--sc-accent) 14%, transparent);
+}

@@ -17,8 +17,9 @@ ui-kit/
   tokens/tokens.json         single source of truth: palettes, fonts, spacing, app colours
   scripts/build-tokens.mjs   regenerates css/tokens.css + swift/SCTheme.swift
   scripts/copy-into.mjs      refreshes or checks an app's vendored copy of the kit
-  css/kit.css                one stylesheet: fonts + tokens + base + components
-  js/theme.js                runtime: skin, palette, effects (no dependencies)
+  css/kit.css                one stylesheet: fonts + tokens + base + components + mac
+  css/mac.css                the macOS skin: the same classes, the platform's shapes
+  js/theme.js                runtime: skin, palette, appearance, effects (no dependencies)
   js/theme-picker.js         <sc-theme-picker>     the same appearance controls everywhere
   js/sync-status.js          <sc-sync-status>      sync readout, driven by sync-kit's window events
   js/toast.js                <sc-toast>            toast region with ScToast.show()
@@ -50,14 +51,15 @@ four attributes, and all the CSS keys off them:
 
 | Attribute | Values | Effect |
 | --- | --- | --- |
-| `data-sc` | present / absent | HUD skin on, or the app's own classic styling |
-| `data-race` | `steel` `crystal` `chitin` | Palette |
+| `data-sc` | `""` / `"mac"` / absent | The HUD skin, the macOS skin, or the app's own classic styling |
+| `data-race` | `steel` `crystal` `chitin` under the HUD, `light` `dark` under macOS | Palette |
 | `data-app` | `heptabase` `idef0` `sysml` `project` `pyramid` `profiler` `hypermail` `metropolis` `habit` `bom` | The app's identity colour (`--sc-app`) |
 | `data-sc-effects="off"` | | Removes the scanlines and glow overlays |
 
-Every app shows appearance preferences through the same `<sc-theme-picker>` and
-stores them under `ui-kit.*` in localStorage. Apps served from the same origin
-therefore share one choice.
+Every app shows appearance preferences through the same `<sc-theme-picker>`:
+Interface (HUD, macOS, Classic), then the HUD's palette and effects or the
+macOS skin's appearance (Auto, Light, Dark). They are stored under `ui-kit.*`
+in localStorage, so apps served from the same origin share one choice.
 
 **Palettes**
 
@@ -71,6 +73,20 @@ The palettes use neutral names on purpose. The look is inspired by sci-fi
 strategy-game HUDs, but options and labels shouldn't use any game's faction
 names or other trademarks. Values stored under the kit's first names migrate
 automatically.
+
+**The macOS skin.** `data-sc="mac"` draws the same markup the way a standard
+Mac app does: system fonts in place of Orbitron, sentence-case labels, rounded
+corners in place of chamfers and brackets, no scanlines or glow, soft shadows,
+a segmented control for tabs, and accent-filled selection in menus and the
+command palette. Its two palettes, `light` and `dark`, are races in
+`tokens/tokens.json` like the HUD's, each with its own status colours (Apple's
+system red, orange, green and teal, which read correctly on those surfaces).
+Auto follows `prefers-color-scheme` and re-applies when the system flips.
+Everything lives in `css/mac.css`, keyed off `html[data-sc="mac"]`, so an app
+that uses tokens and kit classes gets it with no change; the adapters carry a
+short macOS block where they had HUD-specific shapes. The house rules at the
+end describe the HUD; under the macOS skin the platform's own conventions
+replace rules 1, 2 and 5, while 3 and 4 still hold.
 
 **App identity.** Each app has one display name, one two-letter mark and one
 colour, `--sc-app`, used for its brand mark, in the Portal's app switcher, and
@@ -250,7 +266,9 @@ components, such as whiteboard cards and section plates.
 ### A SwiftUI app (IDEF0 macOS, Habit, HomeOrg)
 
 Add `swift/SCTheme.swift` to the target (IDEF0 copies it from its vendored
-`ui-kit/swift/` into the Mac target with its own vendor script):
+`ui-kit/swift/` into the Mac target with its own vendor script). `SCRace`
+carries the three HUD palettes and the two macOS appearances, `.light` and
+`.dark`, so a native window can match a web view exactly:
 
 ```swift
 @AppStorage("ui-kit.race") var race: SCRace = .steel
@@ -334,15 +352,20 @@ Use variables, never raw colours, so all three palettes work:
 - layout: `--sc-portal-bar` (the Portal bar's height)
 - status: `--sc-danger` `--sc-warning` `--sc-success` `--sc-info`
 - alpha: every colour also has an `-rgb` triplet, e.g. `rgb(var(--sc-accent-rgb) / 0.2)`
-- fonts: `--sc-font-display` `--sc-font-ui` `--sc-font-mono`
+- fonts: `--sc-font-display` `--sc-font-ui` `--sc-font-mono` (the system faces under the macOS skin)
+- shape: `--sc-radius` (2px under the HUD, 6px under macOS) `--sc-chamfer` `--sc-bracket`
 
 To change a colour, edit `tokens/tokens.json` and run `npm run tokens` (or
-`node scripts/build-tokens.mjs`). The build is idempotent, so running it twice
+`node scripts/build-tokens.mjs`). A race may carry its own `status` block,
+as the macOS ones do; otherwise the shared status colours apply. The build is idempotent, so running it twice
 changes nothing. Never hand-edit `css/tokens.css` or `swift/SCTheme.swift`.
 
 ---
 
 ## Rules that keep the apps consistent
+
+These describe the HUD skin. Under the macOS skin the platform's conventions
+replace 1, 2 and 5; 3 and 4 always hold.
 
 1. **Pressable things are chamfered, and framing things get brackets.** Don't
    round corners.
