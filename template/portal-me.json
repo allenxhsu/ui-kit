@@ -10,7 +10,7 @@
     { "id": "profiler", "name": "Profiler", "mark": "PR", "color": "#c173de", "path": "/profiler/" },
     { "id": "hypermail", "name": "Hypermail", "mark": "HM", "color": "#e873d1", "path": "/hypermail/" },
     { "id": "metropolis", "name": "Metropolis", "mark": "MP", "color": "#3cbba7", "path": "/metropolis/" },
-    { "id": "habit", "name": "Habit", "mark": "HA", "color": "#eb7aa0", "path": "/habit/" },
+    { "id": "flow", "name": "Flow", "mark": "FL", "color": "#e9677d", "path": "/flow/" },
     { "id": "bom", "name": "BOM Manager", "mark": "BM", "color": "#ced24b", "path": "/bom/" }
   ]
 }
