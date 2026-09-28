@@ -2,7 +2,7 @@
 
 The shared interface for the toolkit apps in `ClaudWorkSpace`: **Heptabase**,
 **IDEF0**, **SysML**, **Project**, **Pyramid**, **Profiler**, **Hypermail**,
-**Metropolis** (the `MindMap` folder), **Habit** and the coming **BOM** app. It
+**Metropolis** (the `MindMap` folder), **Flow** and the coming **BOM** app. It
 gives them one sci-fi HUD look, with brushed-metal panels, chamfered controls,
 lit edges, corner brackets and HUD typography. The same kit works whether an
 app is built with React, plain HTML, or SwiftUI.
@@ -53,7 +53,7 @@ keys off it and three companions:
 | --- | --- | --- |
 | `data-sc` | `""` / `"mac"` | The HUD skin or the macOS skin |
 | `data-race` | `steel` `crystal` `chitin` under the HUD, `light` `dark` under macOS | Palette |
-| `data-app` | `heptabase` `idef0` `sysml` `project` `pyramid` `profiler` `hypermail` `metropolis` `habit` `bom` | The app's identity colour (`--sc-app`) |
+| `data-app` | `heptabase` `idef0` `sysml` `project` `pyramid` `profiler` `hypermail` `metropolis` `flow` `bom` | The app's identity colour (`--sc-app`) |
 | `data-sc-effects="off"` | | Removes the scanlines and glow overlays |
 
 Every app shows appearance preferences through the same `<sc-theme-picker>`:
@@ -100,8 +100,11 @@ every pair of apps sits at least 28° apart in hue.
 | heptabase | HB | `#a48df0` | | profiler | PR | `#c173de` |
 | idef0 | A0 | `#6aa8e6` | | hypermail | HM | `#e873d1` |
 | sysml | SY | `#82cb4d` | | metropolis | MP | `#3cbba7` |
-| project | PP | `#55c364` | | habit | HA | `#eb7aa0` |
+| project | PP | `#55c364` | | flow | FL | `#e9677d` |
 | pyramid | PY | `#e09a5a` | | bom | BM | `#ced24b` |
+
+Flow (`flow`) replaced the never-used Habit app (`habit`), which is retired;
+its hue slot went to Flow.
 
 All three live under `apps.<id>` in `tokens/tokens.json` as
 `{ name, mark, color }`, and that file is the only place they are kept: the
@@ -262,7 +265,7 @@ With Vite, allow the linked folder: `server: { fs: { allow: ['..'] } }`.
 Heptabase adds `src/theme/hud.css` for shapes that are specific to its own
 components, such as whiteboard cards and section plates.
 
-### A SwiftUI app (IDEF0 macOS, Habit, HomeOrg)
+### A SwiftUI app (IDEF0 macOS, HomeOrg)
 
 Add `swift/SCTheme.swift` to the target (IDEF0 copies it from its vendored
 `ui-kit/swift/` into the Mac target with its own vendor script). `SCRace`
@@ -280,7 +283,7 @@ var body: some View {
 }
 
 Text("WORKSPACE").font(SCFont.display(11, weight: .semibold))
-Circle().fill(SCAppColor.habit)
+Circle().fill(SCAppColor.flow)
 ```
 
 Bundle the TTF versions of Orbitron, Exo 2 and Share Tech Mono (Google Fonts, OFL).

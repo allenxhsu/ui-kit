@@ -400,7 +400,7 @@ const VIEWS = {
         </div>
         <div class="sc-section-title">App identity colours</div>
         <div class="swatch-row">
-          ${['heptabase', 'idef0', 'sysml', 'project', 'pyramid', 'profiler', 'hypermail', 'metropolis', 'habit', 'bom']
+          ${['heptabase', 'idef0', 'sysml', 'project', 'pyramid', 'profiler', 'hypermail', 'metropolis', 'flow', 'bom']
             .map((app) => `<div class="swatch" style="background:var(--sc-app-${app});color:var(--sc-void)">${app}</div>`)
             .join('')}
         </div>
