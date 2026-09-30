@@ -1,0 +1,1947 @@
+{
+  "format": "sysml-modeler",
+  "version": 1,
+  "name": "ui-kit architecture",
+  "rootId": "pa_001",
+  "elements": {
+    "pa_001": {
+      "id": "pa_001",
+      "kind": "package",
+      "name": "ui-kit architecture",
+      "ownerId": null,
+      "doc": ""
+    },
+    "pa_011": {
+      "id": "pa_011",
+      "kind": "package",
+      "name": "tokens",
+      "ownerId": "pa_001",
+      "doc": "tokens/tokens.json — the single source of truth: palettes, fonts, spacing, app colours."
+    },
+    "pa_004": {
+      "id": "pa_004",
+      "kind": "package",
+      "name": "css",
+      "ownerId": "pa_001",
+      "doc": "css/kit.css (fonts + tokens + base + components) and css/mac.css (the macOS skin)."
+    },
+    "pa_006": {
+      "id": "pa_006",
+      "kind": "package",
+      "name": "js",
+      "ownerId": "pa_001",
+      "doc": "The runtime and the web components, no dependencies, one .d.ts per module."
+    },
+    "pa_009": {
+      "id": "pa_009",
+      "kind": "package",
+      "name": "swift",
+      "ownerId": "pa_001",
+      "doc": "swift/SCTheme.swift — the same palette for SwiftUI apps. Generated."
+    },
+    "pa_002": {
+      "id": "pa_002",
+      "kind": "package",
+      "name": "adapters",
+      "ownerId": "pa_001",
+      "doc": "Map each existing app’s own CSS variables onto the kit."
+    },
+    "pa_008": {
+      "id": "pa_008",
+      "kind": "package",
+      "name": "scripts",
+      "ownerId": "pa_001",
+      "doc": "build-tokens.mjs and copy-into.mjs."
+    },
+    "pa_010": {
+      "id": "pa_010",
+      "kind": "package",
+      "name": "template",
+      "ownerId": "pa_001",
+      "doc": "A starter app shell, and the live gallery of every component."
+    },
+    "pa_005": {
+      "id": "pa_005",
+      "kind": "package",
+      "name": "fonts",
+      "ownerId": "pa_001",
+      "doc": "Orbitron, Exo 2, Share Tech Mono — OFL, bundled for offline use."
+    },
+    "pa_003": {
+      "id": "pa_003",
+      "kind": "package",
+      "name": "Consumers",
+      "ownerId": "pa_001",
+      "doc": "The four ways an app takes the kit in."
+    },
+    "pa_007": {
+      "id": "pa_007",
+      "kind": "package",
+      "name": "Rules",
+      "ownerId": "pa_001",
+      "doc": "README: the house rules, and the rules that keep vendored copies honest."
+    },
+    "pa_012": {
+      "id": "pa_012",
+      "kind": "package",
+      "name": "Verification",
+      "ownerId": "pa_001",
+      "doc": "There is no test suite: the copy rules are checked by copy-into --check, the house rules by review in the gallery."
+    },
+    "bl_026": {
+      "id": "bl_026",
+      "kind": "block",
+      "name": "ui-kit",
+      "ownerId": "pa_001",
+      "doc": "One sci-fi HUD look — brushed-metal panels, chamfered controls, lit edges, corner brackets — for React, plain HTML and SwiftUI alike.",
+      "isAbstract": false
+    },
+    "bl_025": {
+      "id": "bl_025",
+      "kind": "block",
+      "name": "tokens.json",
+      "ownerId": "pa_011",
+      "doc": "Palettes (steel, crystal, chitin; light and dark for the macOS skin), fonts, spacing, and one identity colour per app.",
+      "isAbstract": false
+    },
+    "bl_021": {
+      "id": "bl_021",
+      "kind": "block",
+      "name": "build-tokens",
+      "ownerId": "pa_008",
+      "doc": "scripts/build-tokens.mjs — regenerates css/tokens.css and swift/SCTheme.swift from tokens.json.",
+      "isAbstract": false
+    },
+    "bl_011": {
+      "id": "bl_011",
+      "kind": "block",
+      "name": "tokens.css",
+      "ownerId": "pa_004",
+      "doc": "Generated custom properties: --sc-*.",
+      "isAbstract": false
+    },
+    "bl_009": {
+      "id": "bl_009",
+      "kind": "block",
+      "name": "kit.css",
+      "ownerId": "pa_004",
+      "doc": "One stylesheet: fonts + tokens + base + components + mac.",
+      "isAbstract": false
+    },
+    "bl_010": {
+      "id": "bl_010",
+      "kind": "block",
+      "name": "mac.css",
+      "ownerId": "pa_004",
+      "doc": "The macOS skin: the same classes, the platform’s shapes, keyed off html[data-sc=\"mac\"].",
+      "isAbstract": false
+    },
+    "bl_023": {
+      "id": "bl_023",
+      "kind": "block",
+      "name": "SCTheme.swift",
+      "ownerId": "pa_009",
+      "doc": "The palette as SwiftUI values.",
+      "isAbstract": false
+    },
+    "bl_019": {
+      "id": "bl_019",
+      "kind": "block",
+      "name": "theme.js",
+      "ownerId": "pa_006",
+      "doc": "Sets data-sc, data-race, data-app and data-sc-effects on <html> before first paint; stores choices under ui-kit.* so apps on one origin share them.",
+      "isAbstract": false
+    },
+    "op_001": {
+      "id": "op_001",
+      "kind": "operation",
+      "name": "apply",
+      "ownerId": "bl_019",
+      "doc": "",
+      "params": "skin, palette, appearance, effects",
+      "returnType": ""
+    },
+    "bl_020": {
+      "id": "bl_020",
+      "kind": "block",
+      "name": "Web component",
+      "ownerId": "pa_006",
+      "doc": "A light-DOM custom element: it wears the page’s CSS, so the kit’s classes style it.",
+      "isAbstract": false
+    },
+    "bl_017": {
+      "id": "bl_017",
+      "kind": "block",
+      "name": "<sc-theme-picker>",
+      "ownerId": "pa_006",
+      "doc": "The same appearance controls in every app: interface, palette, effects.",
+      "isAbstract": false
+    },
+    "bl_016": {
+      "id": "bl_016",
+      "kind": "block",
+      "name": "<sc-sync-status>",
+      "ownerId": "pa_006",
+      "doc": "Sync readout, driven by sync-kit’s window events. The two kits never import each other.",
+      "isAbstract": false
+    },
+    "bl_018": {
+      "id": "bl_018",
+      "kind": "block",
+      "name": "<sc-toast>",
+      "ownerId": "pa_006",
+      "doc": "Toast region, with ScToast.show().",
+      "isAbstract": false
+    },
+    "bl_014": {
+      "id": "bl_014",
+      "kind": "block",
+      "name": "<sc-dialog>",
+      "ownerId": "pa_006",
+      "doc": "A modal that resolves to the pressed button.",
+      "isAbstract": false
+    },
+    "bl_013": {
+      "id": "bl_013",
+      "kind": "block",
+      "name": "<sc-command-palette>",
+      "ownerId": "pa_006",
+      "doc": "⌘K with fuzzy search.",
+      "isAbstract": false
+    },
+    "bl_015": {
+      "id": "bl_015",
+      "kind": "block",
+      "name": "<sc-portal-bar>",
+      "ownerId": "pa_006",
+      "doc": "The Portal’s bar: app switcher, account, sign in and out.",
+      "isAbstract": false
+    },
+    "bl_012": {
+      "id": "bl_012",
+      "kind": "block",
+      "name": "Fonts",
+      "ownerId": "pa_005",
+      "doc": "Orbitron for labels, Exo 2 for reading, Share Tech Mono for figures.",
+      "isAbstract": false
+    },
+    "bl_001": {
+      "id": "bl_001",
+      "kind": "block",
+      "name": "Adapter",
+      "ownerId": "pa_002",
+      "doc": "heptabase.css, idef0.css, metropolis.css, pyramid.css — an app’s own variables, mapped onto the kit’s.",
+      "isAbstract": false
+    },
+    "bl_022": {
+      "id": "bl_022",
+      "kind": "block",
+      "name": "copy-into",
+      "ownerId": "pa_008",
+      "doc": "scripts/copy-into.mjs — refreshes an app’s vendored copy, or with --check reports drift: exit 0 current, 1 drift, 2 a target it cannot handle.",
+      "isAbstract": false
+    },
+    "bl_024": {
+      "id": "bl_024",
+      "kind": "block",
+      "name": "Gallery",
+      "ownerId": "pa_010",
+      "doc": "template/ — a starter shell and a live gallery of every component. npm run serve, then /template/.",
+      "isAbstract": false
+    },
+    "pr_013": {
+      "id": "pr_013",
+      "kind": "property",
+      "name": "tokens",
+      "ownerId": "bl_026",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_025",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_011": {
+      "id": "pr_011",
+      "kind": "property",
+      "name": "stylesheet",
+      "ownerId": "bl_026",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_009",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_010": {
+      "id": "pr_010",
+      "kind": "property",
+      "name": "runtime",
+      "ownerId": "bl_026",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_019",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_008": {
+      "id": "pr_008",
+      "kind": "property",
+      "name": "components",
+      "ownerId": "bl_026",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_020",
+      "typeText": "",
+      "multiplicity": "6",
+      "defaultValue": ""
+    },
+    "pr_012": {
+      "id": "pr_012",
+      "kind": "property",
+      "name": "swiftTheme",
+      "ownerId": "bl_026",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_023",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_009": {
+      "id": "pr_009",
+      "kind": "property",
+      "name": "fonts",
+      "ownerId": "bl_026",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_012",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_007": {
+      "id": "pr_007",
+      "kind": "property",
+      "name": "adapters",
+      "ownerId": "bl_026",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_001",
+      "typeText": "",
+      "multiplicity": "0..*",
+      "defaultValue": ""
+    },
+    "pr_002": {
+      "id": "pr_002",
+      "kind": "property",
+      "name": "tokens",
+      "ownerId": "bl_009",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_011",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_001": {
+      "id": "pr_001",
+      "kind": "property",
+      "name": "macSkin",
+      "ownerId": "bl_009",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_010",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_003": {
+      "id": "pr_003",
+      "kind": "property",
+      "name": "theme",
+      "ownerId": "bl_017",
+      "doc": "",
+      "propKind": "reference",
+      "typeId": "bl_019",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_005": {
+      "id": "pr_005",
+      "kind": "property",
+      "name": "source",
+      "ownerId": "bl_021",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_025",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_004": {
+      "id": "pr_004",
+      "kind": "property",
+      "name": "css",
+      "ownerId": "bl_021",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_011",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "pr_006": {
+      "id": "pr_006",
+      "kind": "property",
+      "name": "swift",
+      "ownerId": "bl_021",
+      "doc": "",
+      "propKind": "part",
+      "typeId": "bl_023",
+      "typeText": "",
+      "multiplicity": "1",
+      "defaultValue": ""
+    },
+    "va_001": {
+      "id": "va_001",
+      "kind": "valueType",
+      "name": "Tokens",
+      "ownerId": "pa_011",
+      "doc": "",
+      "unit": "palettes, fonts, spacing, app colours"
+    },
+    "po_003": {
+      "id": "po_003",
+      "kind": "port",
+      "name": "values",
+      "ownerId": "bl_025",
+      "doc": "",
+      "typeId": "va_001",
+      "typeText": "",
+      "direction": "out",
+      "multiplicity": "1"
+    },
+    "po_001": {
+      "id": "po_001",
+      "kind": "port",
+      "name": "generated",
+      "ownerId": "bl_011",
+      "doc": "",
+      "typeId": "va_001",
+      "typeText": "",
+      "direction": "in",
+      "multiplicity": "1"
+    },
+    "po_002": {
+      "id": "po_002",
+      "kind": "port",
+      "name": "generated",
+      "ownerId": "bl_023",
+      "doc": "",
+      "typeId": "va_001",
+      "typeText": "",
+      "direction": "in",
+      "multiplicity": "1"
+    },
+    "bl_007": {
+      "id": "bl_007",
+      "kind": "block",
+      "name": "Toolkit app",
+      "ownerId": "pa_003",
+      "doc": "Heptabase, IDEF0, SysML, Project, Pyramid, Profiler, Hypermail, Metropolis, Flow, BOM.",
+      "isAbstract": false
+    },
+    "bl_002": {
+      "id": "bl_002",
+      "kind": "block",
+      "name": "Bundled app",
+      "ownerId": "pa_003",
+      "doc": "Heptabase, Hypermail — a Vite app. Depends on \"ui-kit\": \"file:../ui-kit\" and imports subpaths.",
+      "isAbstract": false
+    },
+    "bl_003": {
+      "id": "bl_003",
+      "kind": "block",
+      "name": "No-build app",
+      "ownerId": "pa_003",
+      "doc": "IDEF0, SysML, Project, Metropolis — serves its own folder, so keeps a verbatim copy at <app>/ui-kit/.",
+      "isAbstract": false
+    },
+    "bl_004": {
+      "id": "bl_004",
+      "kind": "block",
+      "name": "Single-file app",
+      "ownerId": "pa_003",
+      "doc": "Pyramid — inlines the CSS and a port of theme.js by hand.",
+      "isAbstract": false
+    },
+    "bl_005": {
+      "id": "bl_005",
+      "kind": "block",
+      "name": "SwiftUI app",
+      "ownerId": "pa_003",
+      "doc": "IDEF0 macOS — uses the generated SCTheme.swift.",
+      "isAbstract": false
+    },
+    "bl_006": {
+      "id": "bl_006",
+      "kind": "block",
+      "name": "sync-kit",
+      "ownerId": "pa_003",
+      "doc": "Publishes sync-kit:status on window; <sc-sync-status> listens.",
+      "isAbstract": false
+    },
+    "bl_008": {
+      "id": "bl_008",
+      "kind": "block",
+      "name": "toolkit-portal",
+      "ownerId": "pa_003",
+      "doc": "Reads only the identity colour from tokens.json; serves /auth/me for the bar.",
+      "isAbstract": false
+    },
+    "re_004": {
+      "id": "re_004",
+      "kind": "requirement",
+      "name": "House rules",
+      "ownerId": "pa_007",
+      "doc": "",
+      "reqId": "UI1",
+      "text": "These describe the HUD skin. Under the macOS skin the platform’s conventions replace 1, 2 and 5; 3 and 4 always hold."
+    },
+    "re_005": {
+      "id": "re_005",
+      "kind": "requirement",
+      "name": "Chamfers and brackets",
+      "ownerId": "re_004",
+      "doc": "",
+      "reqId": "UI1.1",
+      "text": "Pressable things are chamfered, and framing things get brackets. Don’t round corners."
+    },
+    "re_007": {
+      "id": "re_007",
+      "kind": "requirement",
+      "name": "Orbitron for labels",
+      "ownerId": "re_004",
+      "doc": "",
+      "reqId": "UI1.2",
+      "text": "Orbitron is for labels, buttons and headings only. Anything read at length uses Exo 2."
+    },
+    "re_006": {
+      "id": "re_006",
+      "kind": "requirement",
+      "name": "One glow per region",
+      "ownerId": "re_004",
+      "doc": "",
+      "reqId": "UI1.3",
+      "text": "The active item and the primary action glow; nothing else does."
+    },
+    "re_008": {
+      "id": "re_008",
+      "kind": "requirement",
+      "name": "Status colours carry meaning",
+      "ownerId": "re_004",
+      "doc": "",
+      "reqId": "UI1.4",
+      "text": "Don’t use --sc-danger for decoration."
+    },
+    "re_009": {
+      "id": "re_009",
+      "kind": "requirement",
+      "name": "Subtle effects",
+      "ownerId": "re_004",
+      "doc": "",
+      "reqId": "UI1.5",
+      "text": "Scanlines stay at their opacity, and everything decorative respects data-sc-effects=\"off\" and prefers-reduced-motion."
+    },
+    "re_001": {
+      "id": "re_001",
+      "kind": "requirement",
+      "name": "Honest copies",
+      "ownerId": "pa_007",
+      "doc": "",
+      "reqId": "UI2",
+      "text": "A vendored copy shall match the kit it came from."
+    },
+    "re_003": {
+      "id": "re_003",
+      "kind": "requirement",
+      "name": "Never edit a copy",
+      "ownerId": "re_001",
+      "doc": "",
+      "reqId": "UI2.1",
+      "text": "Change the kit here, then refresh from the app. This repo never writes into a sibling."
+    },
+    "re_002": {
+      "id": "re_002",
+      "kind": "requirement",
+      "name": "A stale copy cannot ship",
+      "ownerId": "re_001",
+      "doc": "",
+      "reqId": "UI2.2",
+      "text": "An app’s build and serve scripts run --check and stop on drift."
+    },
+    "re_010": {
+      "id": "re_010",
+      "kind": "requirement",
+      "name": "One source of truth",
+      "ownerId": "pa_007",
+      "doc": "",
+      "reqId": "UI3",
+      "text": "Every colour, font and spacing value shall come from tokens.json; CSS and Swift are generated from it."
+    },
+    "te_002": {
+      "id": "te_002",
+      "kind": "testCase",
+      "name": "copy-into --check",
+      "ownerId": "pa_012",
+      "doc": "Compares a copy by content and lists every drifted file. npm run check-copies runs it over the sibling apps."
+    },
+    "te_003": {
+      "id": "te_003",
+      "kind": "testCase",
+      "name": "Gallery review",
+      "ownerId": "pa_012",
+      "doc": "template/: every component in every palette and both skins, reviewed by eye. Not automated."
+    },
+    "te_001": {
+      "id": "te_001",
+      "kind": "testCase",
+      "name": "build-tokens rerun",
+      "ownerId": "pa_012",
+      "doc": "Regenerating from tokens.json leaves tokens.css and SCTheme.swift unchanged."
+    }
+  },
+  "relationships": {
+    "rl_001": {
+      "id": "rl_001",
+      "kind": "generalization",
+      "sourceId": "bl_017",
+      "targetId": "bl_020",
+      "name": ""
+    },
+    "rl_002": {
+      "id": "rl_002",
+      "kind": "generalization",
+      "sourceId": "bl_016",
+      "targetId": "bl_020",
+      "name": ""
+    },
+    "rl_003": {
+      "id": "rl_003",
+      "kind": "generalization",
+      "sourceId": "bl_018",
+      "targetId": "bl_020",
+      "name": ""
+    },
+    "rl_004": {
+      "id": "rl_004",
+      "kind": "generalization",
+      "sourceId": "bl_014",
+      "targetId": "bl_020",
+      "name": ""
+    },
+    "rl_005": {
+      "id": "rl_005",
+      "kind": "generalization",
+      "sourceId": "bl_013",
+      "targetId": "bl_020",
+      "name": ""
+    },
+    "rl_006": {
+      "id": "rl_006",
+      "kind": "generalization",
+      "sourceId": "bl_015",
+      "targetId": "bl_020",
+      "name": ""
+    },
+    "rl_007": {
+      "id": "rl_007",
+      "kind": "connector",
+      "sourceId": "pr_005",
+      "targetId": "pr_004",
+      "name": "",
+      "ownerId": "bl_021",
+      "sourcePortId": "po_003",
+      "targetPortId": "po_001"
+    },
+    "rl_008": {
+      "id": "rl_008",
+      "kind": "connector",
+      "sourceId": "pr_005",
+      "targetId": "pr_006",
+      "name": "",
+      "ownerId": "bl_021",
+      "sourcePortId": "po_003",
+      "targetPortId": "po_002"
+    },
+    "rl_009": {
+      "id": "rl_009",
+      "kind": "generalization",
+      "sourceId": "bl_002",
+      "targetId": "bl_007",
+      "name": ""
+    },
+    "rl_010": {
+      "id": "rl_010",
+      "kind": "generalization",
+      "sourceId": "bl_003",
+      "targetId": "bl_007",
+      "name": ""
+    },
+    "rl_011": {
+      "id": "rl_011",
+      "kind": "generalization",
+      "sourceId": "bl_004",
+      "targetId": "bl_007",
+      "name": ""
+    },
+    "rl_012": {
+      "id": "rl_012",
+      "kind": "generalization",
+      "sourceId": "bl_005",
+      "targetId": "bl_007",
+      "name": ""
+    },
+    "rl_013": {
+      "id": "rl_013",
+      "kind": "dependency",
+      "sourceId": "bl_002",
+      "targetId": "bl_026",
+      "name": "file: package"
+    },
+    "rl_014": {
+      "id": "rl_014",
+      "kind": "dependency",
+      "sourceId": "bl_003",
+      "targetId": "bl_022",
+      "name": "vendored copy"
+    },
+    "rl_015": {
+      "id": "rl_015",
+      "kind": "dependency",
+      "sourceId": "bl_022",
+      "targetId": "bl_026",
+      "name": "copies"
+    },
+    "rl_016": {
+      "id": "rl_016",
+      "kind": "dependency",
+      "sourceId": "bl_004",
+      "targetId": "bl_019",
+      "name": "inlined port"
+    },
+    "rl_017": {
+      "id": "rl_017",
+      "kind": "dependency",
+      "sourceId": "bl_005",
+      "targetId": "bl_023",
+      "name": ""
+    },
+    "rl_018": {
+      "id": "rl_018",
+      "kind": "dependency",
+      "sourceId": "bl_016",
+      "targetId": "bl_006",
+      "name": "sync-kit:status"
+    },
+    "rl_019": {
+      "id": "rl_019",
+      "kind": "dependency",
+      "sourceId": "bl_015",
+      "targetId": "bl_008",
+      "name": "/auth/me"
+    },
+    "rl_020": {
+      "id": "rl_020",
+      "kind": "dependency",
+      "sourceId": "bl_008",
+      "targetId": "bl_025",
+      "name": "app colours"
+    },
+    "rl_021": {
+      "id": "rl_021",
+      "kind": "dependency",
+      "sourceId": "pa_004",
+      "targetId": "pa_011",
+      "name": "generated from"
+    },
+    "rl_022": {
+      "id": "rl_022",
+      "kind": "dependency",
+      "sourceId": "pa_009",
+      "targetId": "pa_011",
+      "name": "generated from"
+    },
+    "rl_023": {
+      "id": "rl_023",
+      "kind": "dependency",
+      "sourceId": "pa_008",
+      "targetId": "pa_011",
+      "name": ""
+    },
+    "rl_024": {
+      "id": "rl_024",
+      "kind": "dependency",
+      "sourceId": "pa_006",
+      "targetId": "pa_004",
+      "name": "styled by"
+    },
+    "rl_025": {
+      "id": "rl_025",
+      "kind": "dependency",
+      "sourceId": "pa_002",
+      "targetId": "pa_004",
+      "name": ""
+    },
+    "rl_026": {
+      "id": "rl_026",
+      "kind": "dependency",
+      "sourceId": "pa_010",
+      "targetId": "pa_006",
+      "name": ""
+    },
+    "rl_027": {
+      "id": "rl_027",
+      "kind": "dependency",
+      "sourceId": "pa_004",
+      "targetId": "pa_005",
+      "name": ""
+    },
+    "rl_028": {
+      "id": "rl_028",
+      "kind": "dependency",
+      "sourceId": "pa_003",
+      "targetId": "pa_006",
+      "name": ""
+    },
+    "rl_029": {
+      "id": "rl_029",
+      "kind": "satisfy",
+      "sourceId": "bl_009",
+      "targetId": "re_005",
+      "name": ""
+    },
+    "rl_030": {
+      "id": "rl_030",
+      "kind": "satisfy",
+      "sourceId": "bl_012",
+      "targetId": "re_007",
+      "name": ""
+    },
+    "rl_031": {
+      "id": "rl_031",
+      "kind": "satisfy",
+      "sourceId": "bl_009",
+      "targetId": "re_006",
+      "name": ""
+    },
+    "rl_032": {
+      "id": "rl_032",
+      "kind": "satisfy",
+      "sourceId": "bl_011",
+      "targetId": "re_008",
+      "name": ""
+    },
+    "rl_033": {
+      "id": "rl_033",
+      "kind": "satisfy",
+      "sourceId": "bl_019",
+      "targetId": "re_009",
+      "name": ""
+    },
+    "rl_034": {
+      "id": "rl_034",
+      "kind": "satisfy",
+      "sourceId": "bl_022",
+      "targetId": "re_003",
+      "name": ""
+    },
+    "rl_035": {
+      "id": "rl_035",
+      "kind": "satisfy",
+      "sourceId": "bl_022",
+      "targetId": "re_002",
+      "name": ""
+    },
+    "rl_036": {
+      "id": "rl_036",
+      "kind": "satisfy",
+      "sourceId": "bl_021",
+      "targetId": "re_010",
+      "name": ""
+    },
+    "rl_037": {
+      "id": "rl_037",
+      "kind": "verify",
+      "sourceId": "te_003",
+      "targetId": "re_005",
+      "name": ""
+    },
+    "rl_038": {
+      "id": "rl_038",
+      "kind": "verify",
+      "sourceId": "te_003",
+      "targetId": "re_007",
+      "name": ""
+    },
+    "rl_039": {
+      "id": "rl_039",
+      "kind": "verify",
+      "sourceId": "te_003",
+      "targetId": "re_006",
+      "name": ""
+    },
+    "rl_040": {
+      "id": "rl_040",
+      "kind": "verify",
+      "sourceId": "te_003",
+      "targetId": "re_008",
+      "name": ""
+    },
+    "rl_041": {
+      "id": "rl_041",
+      "kind": "verify",
+      "sourceId": "te_003",
+      "targetId": "re_009",
+      "name": ""
+    },
+    "rl_042": {
+      "id": "rl_042",
+      "kind": "verify",
+      "sourceId": "te_002",
+      "targetId": "re_003",
+      "name": ""
+    },
+    "rl_043": {
+      "id": "rl_043",
+      "kind": "verify",
+      "sourceId": "te_002",
+      "targetId": "re_002",
+      "name": ""
+    },
+    "rl_044": {
+      "id": "rl_044",
+      "kind": "verify",
+      "sourceId": "te_001",
+      "targetId": "re_010",
+      "name": ""
+    }
+  },
+  "diagrams": {
+    "dg_001": {
+      "id": "dg_001",
+      "kind": "pkg",
+      "name": "Packages",
+      "ownerId": "pa_001",
+      "symbols": [
+        {
+          "id": "sy_001",
+          "elementId": "pa_010",
+          "x": 340,
+          "y": 40,
+          "w": 200,
+          "h": 90
+        },
+        {
+          "id": "sy_002",
+          "elementId": "pa_006",
+          "x": 640,
+          "y": 40,
+          "w": 200,
+          "h": 90
+        },
+        {
+          "id": "sy_003",
+          "elementId": "pa_003",
+          "x": 940,
+          "y": 40,
+          "w": 200,
+          "h": 90
+        },
+        {
+          "id": "sy_004",
+          "elementId": "pa_002",
+          "x": 340,
+          "y": 260,
+          "w": 200,
+          "h": 90
+        },
+        {
+          "id": "sy_005",
+          "elementId": "pa_004",
+          "x": 640,
+          "y": 260,
+          "w": 200,
+          "h": 90
+        },
+        {
+          "id": "sy_006",
+          "elementId": "pa_005",
+          "x": 940,
+          "y": 260,
+          "w": 200,
+          "h": 90
+        },
+        {
+          "id": "sy_007",
+          "elementId": "pa_008",
+          "x": 340,
+          "y": 480,
+          "w": 200,
+          "h": 90
+        },
+        {
+          "id": "sy_008",
+          "elementId": "pa_011",
+          "x": 640,
+          "y": 480,
+          "w": 200,
+          "h": 90
+        },
+        {
+          "id": "sy_009",
+          "elementId": "pa_009",
+          "x": 940,
+          "y": 480,
+          "w": 200,
+          "h": 90
+        }
+      ],
+      "paths": [
+        {
+          "id": "pa_001",
+          "refId": "rl_026"
+        },
+        {
+          "id": "pa_002",
+          "refId": "rl_028"
+        },
+        {
+          "id": "pa_003",
+          "refId": "rl_024"
+        },
+        {
+          "id": "pa_004",
+          "refId": "rl_025"
+        },
+        {
+          "id": "pa_005",
+          "refId": "rl_027"
+        },
+        {
+          "id": "pa_006",
+          "refId": "rl_021"
+        },
+        {
+          "id": "pa_007",
+          "refId": "rl_023"
+        },
+        {
+          "id": "pa_008",
+          "refId": "rl_022"
+        }
+      ]
+    },
+    "dg_002": {
+      "id": "dg_002",
+      "kind": "bdd",
+      "name": "The kit",
+      "ownerId": "pa_001",
+      "symbols": [
+        {
+          "id": "sy_010",
+          "elementId": "bl_026",
+          "x": 520,
+          "y": 40,
+          "w": 300,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_011",
+          "elementId": "bl_025",
+          "x": 40,
+          "y": 360,
+          "w": 200,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_012",
+          "elementId": "bl_009",
+          "x": 280,
+          "y": 360,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_013",
+          "elementId": "bl_019",
+          "x": 540,
+          "y": 360,
+          "w": 240,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_014",
+          "elementId": "bl_020",
+          "x": 820,
+          "y": 360,
+          "w": 200,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_015",
+          "elementId": "bl_023",
+          "x": 1060,
+          "y": 360,
+          "w": 190,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_016",
+          "elementId": "bl_012",
+          "x": 1290,
+          "y": 360,
+          "w": 150,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_017",
+          "elementId": "bl_001",
+          "x": 1480,
+          "y": 360,
+          "w": 160,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_018",
+          "elementId": "bl_011",
+          "x": 190,
+          "y": 620,
+          "w": 170,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_019",
+          "elementId": "bl_010",
+          "x": 400,
+          "y": 620,
+          "w": 170,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_020",
+          "elementId": "bl_017",
+          "x": 540,
+          "y": 820,
+          "w": 190,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_021",
+          "elementId": "bl_016",
+          "x": 750,
+          "y": 820,
+          "w": 190,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_022",
+          "elementId": "bl_018",
+          "x": 960,
+          "y": 820,
+          "w": 150,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_023",
+          "elementId": "bl_014",
+          "x": 1130,
+          "y": 820,
+          "w": 150,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_024",
+          "elementId": "bl_013",
+          "x": 1300,
+          "y": 820,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_025",
+          "elementId": "bl_015",
+          "x": 1540,
+          "y": 820,
+          "w": 190,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        }
+      ],
+      "paths": [
+        {
+          "id": "pa_009",
+          "refId": "pr_013"
+        },
+        {
+          "id": "pa_010",
+          "refId": "pr_011"
+        },
+        {
+          "id": "pa_011",
+          "refId": "pr_010"
+        },
+        {
+          "id": "pa_012",
+          "refId": "pr_008"
+        },
+        {
+          "id": "pa_013",
+          "refId": "pr_012"
+        },
+        {
+          "id": "pa_014",
+          "refId": "pr_009"
+        },
+        {
+          "id": "pa_015",
+          "refId": "pr_007"
+        },
+        {
+          "id": "pa_016",
+          "refId": "pr_002"
+        },
+        {
+          "id": "pa_017",
+          "refId": "pr_001"
+        },
+        {
+          "id": "pa_018",
+          "refId": "rl_001"
+        },
+        {
+          "id": "pa_019",
+          "refId": "pr_003"
+        },
+        {
+          "id": "pa_020",
+          "refId": "rl_002"
+        },
+        {
+          "id": "pa_021",
+          "refId": "rl_003"
+        },
+        {
+          "id": "pa_022",
+          "refId": "rl_004"
+        },
+        {
+          "id": "pa_023",
+          "refId": "rl_005"
+        },
+        {
+          "id": "pa_024",
+          "refId": "rl_006"
+        }
+      ]
+    },
+    "dg_003": {
+      "id": "dg_003",
+      "kind": "ibd",
+      "name": "The token pipeline",
+      "ownerId": "bl_021",
+      "contextId": "bl_021",
+      "symbols": [
+        {
+          "id": "sy_026",
+          "elementId": "pr_005",
+          "x": 80,
+          "y": 180,
+          "w": 240,
+          "h": 120
+        },
+        {
+          "id": "sy_027",
+          "elementId": "pr_004",
+          "x": 560,
+          "y": 80,
+          "w": 240,
+          "h": 110
+        },
+        {
+          "id": "sy_028",
+          "elementId": "pr_006",
+          "x": 560,
+          "y": 300,
+          "w": 240,
+          "h": 110
+        }
+      ],
+      "paths": [
+        {
+          "id": "pa_025",
+          "refId": "rl_007"
+        },
+        {
+          "id": "pa_026",
+          "refId": "rl_008"
+        }
+      ]
+    },
+    "dg_004": {
+      "id": "dg_004",
+      "kind": "bdd",
+      "name": "How apps take it in",
+      "ownerId": "pa_003",
+      "symbols": [
+        {
+          "id": "sy_029",
+          "elementId": "bl_007",
+          "x": 520,
+          "y": 40,
+          "w": 240,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_030",
+          "elementId": "bl_002",
+          "x": 40,
+          "y": 260,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_031",
+          "elementId": "bl_003",
+          "x": 360,
+          "y": 260,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_032",
+          "elementId": "bl_004",
+          "x": 680,
+          "y": 260,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_033",
+          "elementId": "bl_005",
+          "x": 1000,
+          "y": 260,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_034",
+          "elementId": "bl_022",
+          "x": 360,
+          "y": 560,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_035",
+          "elementId": "bl_019",
+          "x": 680,
+          "y": 560,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_036",
+          "elementId": "bl_023",
+          "x": 1000,
+          "y": 560,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_037",
+          "elementId": "bl_026",
+          "x": 40,
+          "y": 800,
+          "w": 220,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        }
+      ],
+      "paths": [
+        {
+          "id": "pa_027",
+          "refId": "rl_009"
+        },
+        {
+          "id": "pa_028",
+          "refId": "rl_010"
+        },
+        {
+          "id": "pa_029",
+          "refId": "rl_011"
+        },
+        {
+          "id": "pa_030",
+          "refId": "rl_012"
+        },
+        {
+          "id": "pa_031",
+          "refId": "rl_014"
+        },
+        {
+          "id": "pa_032",
+          "refId": "rl_016"
+        },
+        {
+          "id": "pa_033",
+          "refId": "rl_017"
+        },
+        {
+          "id": "pa_034",
+          "refId": "rl_013"
+        },
+        {
+          "id": "pa_035",
+          "refId": "rl_015"
+        },
+        {
+          "id": "pa_036",
+          "refId": "pr_010"
+        },
+        {
+          "id": "pa_037",
+          "refId": "pr_012"
+        }
+      ]
+    },
+    "dg_005": {
+      "id": "dg_005",
+      "kind": "bdd",
+      "name": "Its neighbours",
+      "ownerId": "pa_003",
+      "symbols": [
+        {
+          "id": "sy_038",
+          "elementId": "bl_016",
+          "x": 40,
+          "y": 60,
+          "w": 240,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_039",
+          "elementId": "bl_015",
+          "x": 420,
+          "y": 60,
+          "w": 240,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_040",
+          "elementId": "bl_025",
+          "x": 800,
+          "y": 60,
+          "w": 240,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_041",
+          "elementId": "bl_006",
+          "x": 40,
+          "y": 320,
+          "w": 240,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_042",
+          "elementId": "bl_008",
+          "x": 420,
+          "y": 320,
+          "w": 240,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        }
+      ],
+      "paths": [
+        {
+          "id": "pa_038",
+          "refId": "rl_018"
+        },
+        {
+          "id": "pa_039",
+          "refId": "rl_019"
+        },
+        {
+          "id": "pa_040",
+          "refId": "rl_020"
+        }
+      ]
+    },
+    "dg_006": {
+      "id": "dg_006",
+      "kind": "req",
+      "name": "The rules",
+      "ownerId": "pa_007",
+      "symbols": [
+        {
+          "id": "sy_043",
+          "elementId": "re_004",
+          "x": 620,
+          "y": 40,
+          "w": 280,
+          "h": 0
+        },
+        {
+          "id": "sy_044",
+          "elementId": "re_001",
+          "x": 1490,
+          "y": 40,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_045",
+          "elementId": "re_007",
+          "x": 40,
+          "y": 320,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_046",
+          "elementId": "re_005",
+          "x": 330,
+          "y": 320,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_047",
+          "elementId": "re_006",
+          "x": 620,
+          "y": 320,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_048",
+          "elementId": "re_008",
+          "x": 910,
+          "y": 320,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_049",
+          "elementId": "re_009",
+          "x": 1200,
+          "y": 320,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_050",
+          "elementId": "re_003",
+          "x": 1490,
+          "y": 320,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_051",
+          "elementId": "re_002",
+          "x": 1780,
+          "y": 320,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_052",
+          "elementId": "bl_009",
+          "x": 505,
+          "y": 600,
+          "w": 200,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_053",
+          "elementId": "bl_012",
+          "x": 40,
+          "y": 600,
+          "w": 200,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_054",
+          "elementId": "bl_011",
+          "x": 910,
+          "y": 600,
+          "w": 200,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_055",
+          "elementId": "bl_019",
+          "x": 1200,
+          "y": 600,
+          "w": 200,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_056",
+          "elementId": "bl_022",
+          "x": 1490,
+          "y": 600,
+          "w": 200,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        },
+        {
+          "id": "sy_057",
+          "elementId": "re_010",
+          "x": 1780,
+          "y": 40,
+          "w": 260,
+          "h": 0
+        },
+        {
+          "id": "sy_058",
+          "elementId": "bl_021",
+          "x": 2070,
+          "y": 60,
+          "w": 200,
+          "h": 0,
+          "hide": {
+            "values": true,
+            "parts": true,
+            "ports": true,
+            "operations": true,
+            "references": true
+          }
+        }
+      ],
+      "paths": [
+        {
+          "id": "pa_041",
+          "refId": "own:re_007"
+        },
+        {
+          "id": "pa_042",
+          "refId": "own:re_005"
+        },
+        {
+          "id": "pa_043",
+          "refId": "own:re_006"
+        },
+        {
+          "id": "pa_044",
+          "refId": "own:re_008"
+        },
+        {
+          "id": "pa_045",
+          "refId": "own:re_009"
+        },
+        {
+          "id": "pa_046",
+          "refId": "own:re_003"
+        },
+        {
+          "id": "pa_047",
+          "refId": "own:re_002"
+        },
+        {
+          "id": "pa_048",
+          "refId": "rl_029"
+        },
+        {
+          "id": "pa_049",
+          "refId": "rl_031"
+        },
+        {
+          "id": "pa_050",
+          "refId": "rl_030"
+        },
+        {
+          "id": "pa_051",
+          "refId": "rl_032"
+        },
+        {
+          "id": "pa_052",
+          "refId": "rl_033"
+        },
+        {
+          "id": "pa_053",
+          "refId": "rl_034"
+        },
+        {
+          "id": "pa_054",
+          "refId": "rl_035"
+        },
+        {
+          "id": "pa_055",
+          "refId": "rl_036"
+        }
+      ]
+    },
+    "dg_007": {
+      "id": "dg_007",
+      "kind": "reqtable",
+      "name": "The rules, as a table",
+      "ownerId": "pa_007"
+    },
+    "dg_008": {
+      "id": "dg_008",
+      "kind": "matrix",
+      "name": "What verifies which rule",
+      "ownerId": "pa_012",
+      "relKind": "verify",
+      "rowKind": "testCase",
+      "colKind": "requirement"
+    }
+  }
+}
