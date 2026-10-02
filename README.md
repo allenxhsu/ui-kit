@@ -26,6 +26,7 @@ ui-kit/
   js/dialog.js               <sc-dialog>           modal that resolves to the pressed button
   js/command-palette.js      <sc-command-palette>  ⌘K with fuzzy search
   js/portal-bar.js           <sc-portal-bar>       the Portal's bar: app switcher, account, sign in / out
+  js/connections.js          <sc-connections>      Settings ▸ Connections: Strava, Google, one list for every app
   js/*.d.ts                  types, one per module
   adapters/                  map each existing app's own CSS variables onto the kit
   swift/SCTheme.swift        the same palette for SwiftUI apps
@@ -326,6 +327,7 @@ also exported (`ScToast`, `ScDialog`, …) for the static APIs.
 | `<sc-theme-picker>` | `js/theme-picker.js` | Interface (HUD or macOS), palette, effects and appearance controls. Writes through `theme.js`, stays in sync across tabs. |
 | `<sc-sync-status>` | `js/sync-status.js` | Sync readout: phase dot, "Synced 4 min ago · ↓3 ↑1", Sync now. Driven by `sync-kit:status` events on `window` (or `el.status = …`); its button dispatches `sync-kit:sync-now`. A `lastError` code of `unauthorized` shows a Sign in link instead of the error; offline, an error reads as Offline. Never imports sync-kit. `no-button` hides the button. |
 | `<sc-portal-bar>` | `js/portal-bar.js` | The Portal's bar above the shell: app switcher from the roster (marks in identity colours, current app lit, links to `/<id>/`), account, Sign out. `src` (default `/auth/me`), `app`. Renders from the `toolkit.session` cache first; offline or on 401 it shows Sign in and never blocks the app. |
+| `<sc-connections>` | `js/connections.js` | Settings ▸ Connections. Reads the sync server's `/connect` list — each provider (Google, Strava), whether the server is set up for it, the accounts connected and the features each was granted — and starts or ends a connection. `providers="google,strava"` limits the blocks; `features="calendar,drive"` is what Connect Google asks for (an account lacking one gets an Add button). Apps that reach their server with a token set `el.request`, `el.origin` and, on a Mac shell, `el.open`. Refreshes when the consent window posts `connected` or the page regains focus; on 401 shows Sign in. Children stay after the list, so an app can add its own cards (a file import, say). |
 | `<sc-toast>` | `js/toast.js` | Toast region, bottom-right. `ScToast.show(text, { tone, action, duration })` returns `{ dismiss }`; the region is created on first use if the page has none. |
 | `<sc-dialog>` | `js/dialog.js` | Modal on the `sc-overlay` / `sc-dialog` markup. Children are the body; `heading` and `buttons="id:label:kind,…"` (or `.buttons`) render the chrome. `await el.open()` resolves to the pressed button id; Esc, ✕ and the backdrop resolve `cancel`. `ScDialog.open({ heading, body, buttons })` for one-offs. |
 | `<sc-command-palette>` | `js/command-palette.js` | ⌘K. `el.commands = [{ id, label, shortcut, group }]`; fuzzy filter; ↓ ↑ (⌃N ⌃P) Enter Esc as in Hypermail's palette; dispatches `sc-command` with `{ id, command }`. `hotkey="k"` binds ⌘K / ⌃K. |

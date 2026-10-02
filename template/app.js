@@ -65,6 +65,7 @@ function render() {
   $('#view').innerHTML = VIEWS[current]();
   $('#view').scrollTop = 0;
   mountPortalDemos();
+  mountConnectionsDemos();
 }
 
 // ---------------------------------------------------------------------------
@@ -73,6 +74,28 @@ function render() {
 // without a Portal: 200 with the roster, 401, and a network failure.
 
 const ROSTER = fetch('./portal-me.json').then((r) => r.json());
+
+const CONNECTIONS = {
+  providers: [
+    { id: 'google', name: 'Google', configured: true, features: ['calendar', 'drive', 'sheets'],
+      accounts: [{ id: 'you@gmail.com', label: 'you@gmail.com', connectedAt: Date.now() - 86400000 * 12, features: ['calendar'] }] },
+    { id: 'strava', name: 'Strava', configured: true, features: ['activities'],
+      accounts: [{ id: '1234', label: 'Allen Xu', connectedAt: Date.now() - 3600000, features: ['activities'] }] },
+  ],
+};
+
+function mountConnectionsDemos() {
+  document.querySelectorAll('[data-connections-demo]').forEach((slot) => {
+    const kind = slot.dataset.connectionsDemo;
+    const el = document.createElement('sc-connections');
+    el.setAttribute('features', 'calendar,drive');
+    el.request = async () => (kind === 'signed-out'
+      ? new Response('{"error":"unauthorized"}', { status: 401 })
+      : new Response(JSON.stringify(CONNECTIONS), { status: 200, headers: { 'content-type': 'application/json' } }));
+    el.open = (url) => { alert(`Would open ${url}`); return true; };
+    slot.replaceChildren(el);
+  });
+}
 
 function mountPortalDemos() {
   document.querySelectorAll('[data-portal-demo]').forEach(async (slot) => {
@@ -362,6 +385,15 @@ const VIEWS = {
           <div><div class="sc-label" style="margin-bottom:6px">Signed in</div><div data-portal-demo="online"></div></div>
           <div><div class="sc-label" style="margin-bottom:6px">Signed out (401)</div><div data-portal-demo="signed-out"></div></div>
           <div><div class="sc-label" style="margin-bottom:6px">Offline (fetch failed)</div><div data-portal-demo="offline"></div></div>
+        </div>
+      </section>
+
+      <section class="sc-panel demo">
+        <h2>Connections <span class="sc-faint">&lt;sc-connections&gt;</span></h2>
+        <p class="sc-muted" style="margin-top:0">Settings ▸ Connections: the sync server's <code>/connect</code> list — Google and Strava, the accounts connected, the features each was granted. The buttons open the provider's consent screen. Here the server is a stub.</p>
+        <div class="stack">
+          <div><div class="sc-label" style="margin-bottom:6px">Connected, Drive not yet granted</div><div data-connections-demo="ready"></div></div>
+          <div><div class="sc-label" style="margin-bottom:6px">Signed out (401)</div><div data-connections-demo="signed-out"></div></div>
         </div>
       </section>
 

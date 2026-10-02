@@ -36,13 +36,18 @@
       "types": "./js/portal-bar.d.ts",
       "default": "./js/portal-bar.js"
     },
+    "./connections": {
+      "types": "./js/connections.d.ts",
+      "default": "./js/connections.js"
+    },
     "./tokens.json": "./tokens/tokens.json"
   },
   "files": ["css", "adapters", "fonts", "js", "tokens", "swift"],
   "scripts": {
+    "test": "node --test test/",
     "tokens": "node scripts/build-tokens.mjs",
     "copy-into": "node scripts/copy-into.mjs",
-    "check-copies": "node scripts/copy-into.mjs --check ../IDEF0/ui-kit ../SysML/ui-kit ../Project/ui-kit",
+    "check-copies": "node scripts/copy-into.mjs --check ../IDEF0/ui-kit ../SysML/ui-kit ../Project/ui-kit ../Flow/ui-kit ../skills/ui-kit",
     "serve": "python3 -m http.server 8130"
   }
 }
